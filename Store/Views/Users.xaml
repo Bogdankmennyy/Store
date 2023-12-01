@@ -1,0 +1,199 @@
+﻿<UserControl x:Class="Store.Views.Users"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Store.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="565"
+             d:DesignWidth="925"
+             Background="Transparent">
+
+    <UserControl.Resources>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#bbdefb"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#bbdefb"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Border CornerRadius="10"
+            Background="Transparent">
+        <Grid Name="GridUsers">
+            <Grid x:Name="Content"
+                  Grid.Row="0"
+                  Grid.Column="0"
+                  Grid.ColumnSpan="6"
+                  Grid.RowSpan="8">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                       Grid.ColumnSpan="6"
+                       Text="Обслуговування користувачів"
+                       Foreground="Black"
+                       FontSize="30"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+                <TextBlock Text="Пошук користувача:"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Grid.Column="1"
+                       Grid.Row="2"
+                       FontSize="15"
+                       Margin="0,0,10,0"/>
+
+                <TextBox TextAlignment="Center"
+                       Background="Transparent"
+                       BorderBrush="Pink"
+                     Grid.Column="2"
+                     Grid.Row="2"
+                     FontSize="20"/>
+
+                <Button Grid.Column="3"
+                    Grid.Row="2"
+                    Background="Pink"
+                    BorderBrush="Pink"
+                    Margin="10,0,0,0"
+                    Cursor="Hand"
+                    Width="100"
+                    x:Name="BtnSearch"
+                    HorizontalAlignment="Left">
+                    <TextBlock Text="Пошук"
+                           Foreground="White"
+                           FontSize="15"/>
+                </Button>
+
+                <Button Background="#bbdefb"
+                    BorderBrush="#bbdefb"
+                    Grid.Column="4"
+                    Grid.Row="2"
+                    Cursor="Hand"
+                    Width="150"
+                    x:Name="BtnCreateUser"
+                    Click= "Add">
+
+                    <TextBlock Text="Додати користувача"
+                           Foreground="White"
+                           FontSize="15"/>
+
+                </Button>
+
+                <DataGrid Grid.Row="4"
+                      Grid.Column="1"
+                      Grid.RowSpan="2"
+                      Grid.ColumnSpan="4"
+                      x:Name="GridData"
+                      AutoGenerateColumns="False"
+                      Background="GhostWhite"
+                      Foreground="#c48b9f"
+                      FontSize="15"
+                      CanUserAddRows="False"
+                      CanUserResizeColumns="True"
+                      CanUserResizeRows="False"
+                      CanUserSortColumns="False"
+                      RowBackground="Transparent"
+                      HeadersVisibility="Column"
+                      GridLinesVisibility="Horizontal"
+                      HorizontalGridLinesBrush="#c48b9f">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Пaрaметри адміністратора"
+                                            Width="245">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <Button Content="Звернутись"
+                                            x:Name="BtnConsultar"
+                                            Background="Pink"
+                                            Width="80"
+                                            BorderBrush="Transparent"
+                                           Foreground="White"
+                                            Click="Consult" 
+                                                Cursor="Hand"
+                                            CommandParameter="{Binding IdUser}"/>
+                                        <Button Content="Змінити"
+                                            x:Name="BtnModificar"
+                                          Background="Pink"
+                                             Width="80"
+                                            BorderBrush="Transparent"
+                                            Foreground="White" 
+                                                 Cursor="Hand"
+                                            CommandParameter="{Binding IdUser}"
+                                            Click="Update"/>
+                                        <Button Content="Видалити"
+                                             x:Name="BtnEliminar"
+                                               Background="Pink"
+                                                Width="80"
+                                                BorderBrush="Transparent"
+                                            Foreground="White"
+                                                 Cursor="Hand"
+                                            CommandParameter="{Binding IdUser}" 
+                                            Click="Remove"/>
+                                    </DockPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Header="ID"
+                                        Width="50"
+                                        Binding="{Binding IdUser}"/>
+                        <DataGridTextColumn Header="Names"
+                                         Width="100"
+                                        Binding="{Binding Names}"/>
+                        <DataGridTextColumn Header="Surnames"
+                                          Width="100"
+                                        Binding="{Binding Surnames}"/>
+                        <DataGridTextColumn Header="Phone"
+                                             Width="100"
+                                        Binding="{Binding Phone}"/>
+                        <DataGridTextColumn Header="Email"
+                                            Width="*"
+                                        Binding="{Binding Mail}"/>
+                        <DataGridTextColumn Header="privilege"
+                                             Width="*"
+                                        Binding="{Binding NombrePrivilege }"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+            
+
+
+            <Frame x:Name="FrameUsers"
+                   Grid.Column="0"
+                   Grid.Row="0"
+                   Grid.RowSpan="8"
+                   Grid.ColumnSpan="6"/>
+
+
+
+        </Grid>
+    </Border>
+
+</UserControl>
