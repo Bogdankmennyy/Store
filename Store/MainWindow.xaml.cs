@@ -40,7 +40,7 @@ namespace Store
         }
 
         private void PreviewMouseleftBottonDownBG(object sender, MouseButtonEventArgs e)
-        {
+        { 
             BtnShowHide.IsChecked = false;
         }
 
